@@ -1,5 +1,9 @@
 hello this file explains how to run the server.
 
+if you have any questions, feel free to message me. i had to go through a lot of installing and
+trial and error to get this to work. this is just my guess at what you'll need to do based on
+what i've figured out so far.
+
 requirements:
 - python
 - django (https://docs.djangoproject.com/en/4.2/intro/install/)
@@ -24,4 +28,32 @@ note about the key: i'm not really sure how the key works still. django created 
 it's used as some sort of hashing mechanism for the object relational mapper, not sure though.
 
 4. in terminal cd to server
-5. run py manage.py runserver
+5. run py manage.py migrate
+6. run py manage.py runserver
+
+testing the server:
+by default, the server runs on port 8000
+endpoints:
+localhost:8000/api/events/ <- view events (GET)
+localhost:8000/api/events/create <- create event (POST)
+localhost:8000/api/events/uuid/subscribe <- subscribe to certain event (POST)
+you can try out these endpoints with mockdata.
+create receives a json in this format:
+{
+    "date": "23-05-05",
+    "time": "01:02 PM",
+    "title": "new event",
+    "description": "this is a new event",
+    "email": "ethan@email.com"
+}
+and returns back the same json except with a uuid (representing the event)
+subscribe receives a json in this format:
+{
+    "name": "Ethan Ho",
+    "email": "ethan@email.com"
+}
+and returns back the same json except with a uuid for the event subscribed to and a new uuid for the participant
+
+alternatively, if you don't want to test out the endpoints or you don't have postman/any equivalent program,
+you can create an admin account (https://docs.djangoproject.com/en/4.2/intro/tutorial02/) 
+skip to the part where it says "Creating an admin user"
