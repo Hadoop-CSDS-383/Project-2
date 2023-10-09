@@ -1,0 +1,27 @@
+hello this file explains how to run the server.
+
+requirements:
+- python
+- django (https://docs.djangoproject.com/en/4.2/intro/install/)
+- postgresql (https://www.postgresql.org/download/)
+- pgadmin (https://www.pgadmin.org/download/)
+- pip (https://pip.pypa.io/en/stable/)
+
+steps:
+1. open up pgadmin and create an account. pgadmin is just a GUI tool to interact with postgresql
+2. right click databases and create a new database. this will be your database name (remember it)
+3. create an .env file in server/backend with the following information
+
+DB_NAME=[your database name]
+DB_USER=postgres
+DB_PASSWORD=[your password]
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DEBUG=on
+SECRET_KEY=[there is a secret key i have shared it in the discord]
+
+note about the key: i'm not really sure how the key works still. django created it, and my guess is that
+it's used as some sort of hashing mechanism for the object relational mapper, not sure though.
+
+4. in terminal cd to server
+5. run py manage.py runserver
