@@ -15,7 +15,12 @@ steps:
 1. open up pgadmin and create an account. pgadmin is just a GUI tool to interact with postgresql
 2. right click databases and create a new database. this will be your database name (remember it)
 
-Non linux based users:
+Linux/Mac/(can run bash based users) can run the following commands while in /server:
+3a. chmod +X setupEnv.sh
+3b. ./setupEnv.sh [your database name] [your password] '[secret key]'
+3c. source env/bin/activate
+
+Any users (assuming you didn't do the above 3a-3c):
 3. create an .env file in server/backend with the following information
 
 DB_NAME=[your database name]
@@ -28,11 +33,6 @@ SECRET_KEY=[there is a secret key i have shared it in the discord]
 
 note about the key: i'm not really sure how the key works still. django created it, and my guess is that
 it's used as some sort of hashing mechanism for the object relational mapper, not sure though.
-
-Linux/Mac/(can run bash based users) can run the following commands while in /server:
-3a. chmod +X setupEnv.sh
-3b. ./setupEnv.sh [your database name] [your password] '[secret key]'
-3c. source env/bin/activate
 
 4. in terminal cd to server
 5. run py manage.py migrate
