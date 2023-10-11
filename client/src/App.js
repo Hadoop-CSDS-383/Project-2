@@ -31,27 +31,46 @@ const events = [
     allDay: true,
     start: new Date(2023,10,0),
     end: new Date(2023,10,0),
+    participants: [],
   },
   {
     title: "Vacation",
     start: new Date(2023,9,17),
     end: new Date(2023,9,20),
+    participants: [],
+    
   },
   {
     title: "Conference",
     start: new Date(2023,9,25),
     end: new Date(2023,9,25),
+    participants: [],
   },
 
 ]
 
+function CustomEvent({event}){
+  const handleParticipants = () => {
+    event.participants.push("Database time");
+  }
+
+  return (
+    <div className='custom-event'>
+      <div>{event.title}</div>
+      <div>Participants: {event.participants.length > 0 ? event.participants.join(", ") : "No participants yet"}</div>
+      <button onClick={handleParticipants}>Join Event</button>
+    </div>
+  )
+}
+
 function App() {
-  const [newEvent, setNewEvent] = useState({title: "", start: "", end: ""})
+  const [newEvent, setNewEvent] = useState({title: "", start: "", end: "", description: ""})
   const [allEvents, setAllEvents] = useState(events)
 
   function handleAddEvent() {
     setAllEvents([...allEvents,newEvent])
   }
+
 
   return (
     <div className='App'>
@@ -60,8 +79,11 @@ function App() {
       </h1>
       <h2>Add New Event</h2>
       <div>
-        <input type="text" placeholder='Add Title' style={{ width: "20%", marginRight: "10px"}}
-          value={newEvent.title} onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}
+        <input type="text" placeholder='Add Title 255 characters' style={{ width: "20%", marginRight: "10px"}}
+          value={newEvent.title} onChange={(e) => setNewEvent({...newEvent, title: e.target.value})} required maxLength={255}
+        />
+        <input type="text" placeholder='Add description 600 characters' style={{ width: "15%", height: "75px", marginRight: "10px", justifyContent:"center", alignItems:"flex-start"}}
+          value={newEvent.description} onChange={(e) => setNewEvent({...newEvent, description: e.target.value})} required maxLength={600}
         />
         <DatePicker placeholderText="Start Date" style={{marginRight: "10px"}}
         selected={newEvent.start} onChange={(start) => setNewEvent({...newEvent,start})}/>
@@ -72,7 +94,9 @@ function App() {
       <Calendar 
       localizer={localizer} events={allEvents} 
       startAccessor="start" endAccessor="end"
-      style={{ height: 500, margin: "50px" }} />
+      style={{ height: 500, margin: "50px" }} 
+        components={{ event: CustomEvent}}
+      />
     </div>
   );
 }
