@@ -7,8 +7,6 @@ what i've figured out so far.
 requirements:
 - python
 - django (https://docs.djangoproject.com/en/4.2/intro/install/)
-- postgresql (https://www.postgresql.org/download/)
-- pgadmin (https://www.pgadmin.org/download/)
 - pip (https://pip.pypa.io/en/stable/)
 
 steps:
@@ -17,26 +15,25 @@ steps:
 
 Linux/Mac/(can run bash based users) can run the following commands while in /server:
 3a. chmod +X setupEnv.sh
-3b. ./setupEnv.sh [your database name] [your password] '[secret key]'
+3b. ./setupEnv.sh [db host] [dbUser] [dbUserPassword] [dbName] [secrete django key]
 3c. source env/bin/activate
 
 Any users (assuming you didn't do the above 3a-3c):
 3. create an .env file in server/backend with the following information
 
-DB_NAME=[your database name]
-DB_USER=postgres
-DB_PASSWORD=[your password]
-DB_HOST=127.0.0.1
-DB_PORT=5432
+DB_NAME=[db name here]
+DB_USER=[db user here]
+DB_PASSWORD=[db user password here]
+DB_HOST=[db host here]
+SECRET_KEY=[secret key here]
 DEBUG=on
-SECRET_KEY=[there is a secret key i have shared it in the discord]
+
 
 note about the key: i'm not really sure how the key works still. django created it, and my guess is that
 it's used as some sort of hashing mechanism for the object relational mapper, not sure though.
 
 4. in terminal cd to server
-5. run py manage.py migrate
-6. run py manage.py runserver
+5. run py manage.py runserver
 
 testing the server:
 by default, the server runs on port 8000
