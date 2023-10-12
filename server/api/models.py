@@ -6,7 +6,7 @@ class Event(models.Model):
     id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
-        editable=False
+        unique=True,
     )
     date = models.DateField()
     time = models.TimeField()
@@ -18,7 +18,7 @@ class EventParticipant(models.Model):
     id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
-        editable=False
+        unique=True
     )
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     name = models.CharField(max_length=600)

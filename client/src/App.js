@@ -1,50 +1,32 @@
 import './App.css';
-import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
-import format from 'date-fns/format';
-import parse from 'date-fns/parse';
-import startOfWeek from 'date-fns/startOfWeek';
-import getDay from 'date-fns/getDay';
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import React, { useEffect, useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import {EventForm} from './components/eventForm.js';
 
+import 'react-datepicker/dist/react-datepicker.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+
+
+/* Routes */
+import { CreateEvent } from './views/Create-Event.js';
+import { ListEvents } from './views/List-Events.js';
+import { AddParticipant } from './views/Add-Participant.js';
+import { ListParticipants } from './views/List-Participants.js';
+import { ListEventParticipants } from './views/List-Event-Participants.js';
+import { Home } from './views/Home.js';
 
 function App() {
 
-// Leaving the following code blocks for reference to refactor to seperate forms/actions
-  
-  // useEffect(() => {
-  //   const fetchEvents = async () => {
-  //     const response = await fetch('/api/events/')
-  //     const json = await response.json()
-
-  //     if (response.ok) {
-  //       console.log(json)
-  //       setEvents(json)
-
-  //     }
-  //   }
-  //   fetchEvents()
-  // }, [])
-
-  // const fetchEvents = async () => {
-  //   const response = await fetch('/api/events/');
-  //   const json = await response.json();
-
-  //   if (response.ok) {
-  //     console.log(json);
-  //     setEvents(json);
-  //   }
-  // };
-
-  
-
-
- return (
-    <EventForm> Event Form </EventForm>
- )
+   return (
+      <Router>
+         <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/create-event" element={<CreateEvent />} />
+            <Route path="/list-events" element={<ListEvents />} />
+            <Route path="/add-participant" element={<AddParticipant />} />
+            <Route path="/list-all-participants" element={<ListParticipants />} />
+            <Route path="/list-event-participants" element={<ListEventParticipants />} />
+         </Routes>
+      </Router>
+   )
 
 }
 
