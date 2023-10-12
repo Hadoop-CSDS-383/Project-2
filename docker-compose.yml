@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=eventManagement
+      - POSTGRES_USER=hadoop-instance-0
+      - POSTGRES_PASSWORD=teamhadoop
+  backend:
+    build:
+      context: ./server/
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./server/:/code
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_NAME=eventManagement
+      - DB_USER=hadoop-instance-0
+      - DB_PASSWORD=teamhadoop
+      - DB_HOST=34.162.201.65
+      - SECRET_KEY=django-insecure-g232rj_6_h#p62b)6mo0wfrp%haof@#z%*p&i8=l_8r=4c@fr(
+      - DEBUG=on
+    depends_on:
+      - db
+  frontend:
+    build:
+      context: ./client/
+    command: npm start
+    volumes:
+      - ./client/:/code/
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
