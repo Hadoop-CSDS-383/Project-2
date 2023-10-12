@@ -4,7 +4,7 @@
 python3 -m venv env
 
 # install dependencies
-env/bin/pip install -r dependencies.txt
+python3 -m pip install -r dependencies.txt
 
 # create .env file in the backend directory with the provided arguments
 dbHost=$1
