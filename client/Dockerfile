@@ -1,10 +1,8 @@
 FROM node:latest
 
-# Create app directory
-WORKDIR /code
-COPY . /code/
+WORKDIR /client
 
-# Install app dependencies
-RUN npm install
-# Starting with npm start
+COPY . /client/
+RUN ls
+RUN npm install --verbose
 

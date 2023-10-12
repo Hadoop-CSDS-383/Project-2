@@ -11,7 +11,7 @@ services:
       - POSTGRES_PASSWORD=teamhadoop
   backend:
     build:
-      context: ./server/
+      context: server
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./server/:/code
@@ -27,11 +27,10 @@ services:
     depends_on:
       - db
   frontend:
-    build:
-      context: ./client/
+    build: ./client
     command: npm start
     volumes:
-      - ./client/:/code/
+      - ./client/:/code
     ports:
       - "3000:3000"
     depends_on:
