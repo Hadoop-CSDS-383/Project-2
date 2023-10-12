@@ -11,12 +11,8 @@
     - https://docs.docker.com/desktop/install/windows-install/
 
 ### Installation on MacOS
-- Follow this tutorial to install docker:
-    - https://docs.docker.com/desktop/install/mac-install/
-- Or, if you are comfortable with `brew`
-```bash
-brew install docker docker-compose
-```
+- Install from Docker Desktop (docker cli tools are buggy on mac)
+    - https://www.docker.com/products/docker-desktop/
 
 ### Installation on Linux
 - Follow this tutorial to install docker:
