@@ -6,3 +6,5 @@ COPY . /client/
 RUN ls
 RUN npm install --verbose
 
+EXPOSE 3000
+

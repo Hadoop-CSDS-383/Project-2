@@ -7,3 +7,4 @@ COPY . /code/
 #COPY dependencies.txt /code/
 RUN pip install -r dependencies.txt
 #RUN ./code/setupEnv.sh $DB_HOST $DB_USER $DB_PASSWORD $DB_NAME $SECRET_KEY
+EXPOSE 8000

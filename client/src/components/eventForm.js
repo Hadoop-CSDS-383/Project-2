@@ -20,7 +20,7 @@ export function EventForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        fetch('api/events/create', {
+        fetch('http://localhost:8000/api/events/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

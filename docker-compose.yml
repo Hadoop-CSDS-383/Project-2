@@ -1,37 +1,46 @@
 services:
   db:
+    container_name: db
     image: postgres
-    volumes:
-      - ./data/db:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
     environment:
       - POSTGRES_DB=eventManagement
       - POSTGRES_USER=hadoop-instance-0
       - POSTGRES_PASSWORD=teamhadoop
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
   backend:
     build:
       context: server
-    command: python manage.py runserver 127.0.0.1:8000
     volumes:
       - ./server/:/code
     ports:
       - "8000:8000"
     environment:
+      - POSTGRES_DB=eventManagement
+      - POSTGRES_USER=hadoop-instance-0
+      - POSTGRES_PASSWORD=teamhadoop
       - DB_NAME=eventManagement
       - DB_USER=hadoop-instance-0
       - DB_PASSWORD=teamhadoop
-      - DB_HOST=34.162.201.65
+      - DB_HOST=db
       - SECRET_KEY=django-insecure-g232rj_6_h#p62b)6mo0wfrp%haof@#z%*p&i8=l_8r=4c@fr(
       - DEBUG=on
     depends_on:
       - db
+    command:  bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+
   frontend:
     build: ./client
-    command: npm start
     volumes:
       - ./client/:/code
     ports:
       - "3000:3000"
     depends_on:
       - backend
+    command: npm start
+ #Docker Networks
+volumes:
+  pgdata: {}
