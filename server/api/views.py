@@ -14,14 +14,12 @@ def get_events(request):
 def create_event(request):
     if request.method != "POST":
         return JsonResponse({'status': 'not ok'})
+    print(request.body)
     body = json.loads(request.body)
     parsed_date = body['date'].split('-')
     date = datetime.date(int(parsed_date[0]), int(parsed_date[1]), int(parsed_date[2]))
-    pm = 2
-    parsed_time = body['time'].split(" ")
-    pm = 2 if parsed_time[1] == "PM" else 1
-    parsed_time = parsed_time[0].split(":")
-    time = datetime.time(int(parsed_time[0])*pm, int(parsed_time[1]))
+    parsed_time = body['time'].split(":")
+    time = datetime.time(int(parsed_time[0]), int(parsed_time[1]))
     title = body['title']
     description = body['description']
     email = body['email']
